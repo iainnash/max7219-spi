@@ -142,12 +142,9 @@ static bool mgos_max7219_reset(struct mgos_max7219 *dev) {
   return true;
 }
 
-struct mgos_max7219 *mgos_max7219_create(struct mgos_spi *spi, uint8_t cs_index) {
+struct mgos_max7219 *mgos_max7219_create(uint8_t cs_index) {
   struct mgos_max7219 *dev = NULL;
-
-  if (!spi) {
-    return NULL;
-  }
+  struct mgos_spi *spi = mgos_spi_get_global();
 
   dev = calloc(1, sizeof(struct mgos_max7219));
   if (!dev) {
